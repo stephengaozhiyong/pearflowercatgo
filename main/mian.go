@@ -2,33 +2,30 @@ package main
 
 import (
 	"fmt"
-	"log"
-
-	"headfirstgo/datafile"
+	"headfirstgo/magazine"
 )
 
+func showSubInfo(s *magazine.Subsriber) {
+	fmt.Println("Name:", s.Name)
+	fmt.Printf("Rate: %0.2f\n", s.Rate)
+	fmt.Println("Active?", s.Active)
+}
+
+func defSub(name string) *magazine.Subsriber {
+	s := magazine.Subsriber{Name: name, Rate: 5.99, Active: true}
+	return &s
+}
+
+func applyDiscount(s *magazine.Subsriber) {
+	s.Rate = 4.99
+}
+
 func main() {
-	lines, err := datafile.GetStrings("/home/sgao/go/src/headfirstgo/main/votes.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println(lines)
-	var names []string
-	var counts []int
-	for _, line := range lines {
-		matched := false
-		for i, name := range names {
-			if name == line {
-				matched = true
-				counts[i]++
-			}
-		}
-		if !matched {
-			names = append(names, line)
-			counts = append(counts, 1)
-		}
-	}
-	for i, name := range names {
-		fmt.Printf("%s: %d\n", name, i)
-	}
+	s1 := defSub("gao")
+	applyDiscount(s1)
+	showSubInfo(s1)
+	e1 := magazine.Employee{Name: "zhao", Salary: 18000, HomeAddr: magazine.Address{Street: "guli", City: "NanJing", State: "Jiangsu", PostalCode: "123456"}}
+	fmt.Println(e1)
+	s1.Address.City = "BeiJing"
+	fmt.Println(s1.City)
 }
