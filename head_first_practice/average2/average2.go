@@ -1,4 +1,4 @@
-package main
+package average2
 
 import (
 	"fmt"
@@ -7,7 +7,7 @@ import (
 	"strconv"
 )
 
-func average(nums ...float64) float64 {
+func Average(nums ...float64) float64 {
 	var sum float64 = 0
 	for _, n := range nums {
 		sum += n
@@ -27,5 +27,5 @@ func main() {
 		}
 		nums = append(nums, n)
 	}
-	fmt.Printf("平均数：%v\n", average(nums...))
+	fmt.Printf("平均数：%v\n", Average(nums...))
 }
